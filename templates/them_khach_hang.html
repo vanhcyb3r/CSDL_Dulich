@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Khách Hàng</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Thêm Khách Hàng Mới</h1>
+    </div>
+
+    <div class="container">
+        <form action="{{ url_for('them_khach_hang') }}" method="POST">
+            <label for="ten_khach_hang">Tên Khách Hàng:</label>
+            <input type="text" id="ten_khach_hang" name="ten_khach_hang" required>
+            
+            <label for="so_id">Số ID:</label>
+            <input type="text" id="so_id" name="so_id" required>
+
+            <label for="loai_id">Loại ID:</label>
+            <input type="text" id="loai_id" name="loai_id" required>
+
+            <label for="so_dien_thoai">Số Điện Thoại:</label>
+            <input type="text" id="so_dien_thoai" name="so_dien_thoai" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+
+            <label for="dia_chi">Địa Chỉ:</label>
+            <input type="text" id="dia_chi" name="dia_chi">
+
+            <input type="submit" value="Thêm Khách Hàng">
+        </form>
+    </div>
+</body>
+</html>

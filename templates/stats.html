@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thống kê</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Thống kê Tour Du lịch</h1>
+        <a href="/">Trang chủ</a>
+    </div>
+
+    <div class="container">
+        <h2>Thống kê Doanh thu và Lượt đặt vé</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tên Tour</th>
+                    <th>Số Lượng Vé Đã Bán</th>
+                    <th>Tổng Doanh Thu</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tour in thong_ke %}
+                <tr>
+                    <td>{{ tour.ten_tour }}</td>
+                    <td>{{ tour.so_luong_ve }}</td>
+                    <td>{{ tour.tong_doanh_thu }} VNĐ</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

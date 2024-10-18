@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm kiếm tour</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Tìm kiếm Tour</h1>
+        <a href="/">Trang chủ</a>
+    </div>
+
+    <div class="container">
+        <form action="/tim-kiem-tour" method="POST">
+            <label for="ten_tour">Nhập tên tour:</label>
+            <input type="text" id="ten_tour" name="ten_tour" required>
+            <button type="submit">Tìm kiếm</button>
+        </form>
+    </div>
+</body>
+</html>

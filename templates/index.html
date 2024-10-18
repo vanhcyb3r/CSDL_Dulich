@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ - Quản lý Tour du lịch</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #4CAF50;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+        .container {
+            margin: 50px auto;
+            width: 80%;
+            text-align: center;
+        }
+        .nav {
+            margin: 20px 0;
+        }
+        .nav a {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .nav a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Hệ thống Quản lý Tour Du lịch</h1>
+    </div>
+
+    <div class="container">
+        <h2>Chào mừng bạn đến với hệ thống quản lý tour</h2>
+        <p>Chọn một chức năng để bắt đầu:</p>
+        
+        <div class="nav">
+            <a href="/tim-kiem-tour">Tìm kiếm Tour</a>
+            <a href="/quan-ly-tour">Quản lý Tour</a>
+            <a href="/quan-ly-khach-hang">Quản lý Khách hàng</a>
+            <a href="/thong-ke">Thống kê</a>
+        </div>
+    </div>
+</body>
+</html>

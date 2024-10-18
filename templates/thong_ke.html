@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thống Kê</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Thống Kê</h1>
+    </div>
+
+    <div class="container">
+        <h3>Tổng Doanh Thu: {{ tong_doanh_thu }}</h3>
+        <h3>Số Lượng Khách Hàng: {{ so_luong_khach_hang }}</h3>
+        <h3>Số Lượng Tour Đã Đặt: {{ so_luong_tour_da_dat }}</h3>
+    </div>
+</body>
+</html>

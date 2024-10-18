@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý tour</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Quản lý Tour Du lịch</h1>
+        <a href="/">Trang chủ</a>
+    </div>
+
+    <div class="container">
+        <a href="/them-tour">Thêm Tour</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tên Tour</th>
+                    <th>Nơi Xuất Phát</th>
+                    <th>Nơi Đến</th>
+                    <th>Ngày Xuất Phát</th>
+                    <th>Giá Tour</th>
+                    <th>Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tour in tours %}
+                <tr>
+                    <td>{{ tour.ten_tour }}</td>
+                    <td>{{ tour.noi_xuat_phat }}</td>
+                    <td>{{ tour.noi_den }}</td>
+                    <td>{{ tour.ngay_xuat_phat }}</td>
+                    <td>{{ tour.gia_tour }} VNĐ</td>
+                    <td>
+                        <a href="/sua-tour/{{ tour.ma_tour }}">Sửa</a> | 
+                        <form action="{{ url_for('xoa_tour', ma_tour=tour.ma_tour) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa tour này?');">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

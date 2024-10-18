@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sửa tour</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Sửa Tour</h1>
+        <a href="/quan-ly-tour">Quay lại danh sách Tour</a>
+    </div>
+
+    <div class="container">
+        <form action="/sua-tour/{{ tour.ma_tour }}" method="POST">
+            <label for="ten_tour">Tên Tour:</label>
+            <input type="text" id="ten_tour" name="ten_tour" value="{{ tour.ten_tour }}" required>
+
+            <label for="noi_xuat_phat">Nơi Xuất Phát:</label>
+            <input type="text" id="noi_xuat_phat" name="noi_xuat_phat" value="{{ tour.noi_xuat_phat }}" required>
+
+            <label for="noi_den">Nơi Đến:</label>
+            <input type="text" id="noi_den" name="noi_den" value="{{ tour.noi_den }}" required>
+
+            <label for="ngay_xuat_phat">Ngày Xuất Phát:</label>
+            <input type="date" id="ngay_xuat_phat" name="ngay_xuat_phat" value="{{ tour.ngay_xuat_phat }}" required>
+
+            <label for="gia_tour">Giá Tour:</label>
+            <input type="text" id="gia_tour" name="gia_tour" value="{{ tour.gia_tour }}" required>
+
+            <label for="so_luong_ve">Số Lượng Vé:</label>
+            <input type="number" id="so_luong_ve" name="so_luong_ve" value="{{ tour.so_luong_ve }}" required>
+
+            <button type="submit">Cập nhật</button>
+        </form>
+    </div>
+</body>
+</html>

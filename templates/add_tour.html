@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Tour Mới</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Thêm Tour Mới</h1>
+        <a href="/quan-ly-tour">Quay lại danh sách Tour</a>
+    </div>
+
+    <div class="container">
+        <form action="/them-tour" method="POST">
+            <label for="ten_tour">Tên Tour:</label>
+            <input type="text" id="ten_tour" name="ten_tour" required>
+
+            <label for="noi_xuat_phat">Nơi Xuất Phát:</label>
+            <input type="text" id="noi_xuat_phat" name="noi_xuat_phat" required>
+
+            <label for="noi_den">Nơi Đến:</label>
+            <input type="text" id="noi_den" name="noi_den" required>
+
+            <label for="mo_ta">Mô Tả:</label>
+            <textarea id="mo_ta" name="mo_ta"></textarea>
+
+            <label for="ngay_xuat_phat">Ngày Xuất Phát:</label>
+            <input type="date" id="ngay_xuat_phat" name="ngay_xuat_phat" required>
+
+            <label for="gia_tour">Giá Tour:</label>
+            <input type="number" id="gia_tour" name="gia_tour" step="0.01" required>
+
+            <label for="so_luong_ve">Số Lượng Vé:</label>
+            <input type="number" id="so_luong_ve" name="so_luong_ve" required>
+
+            <button type="submit">Thêm Tour</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Khách Hàng</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Quản lý Khách Hàng</h1>
+        <a href="/them-khach-hang" class="btn">Thêm Khách Hàng Mới</a>
+    </div>
+
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã Khách Hàng</th>
+                    <th>Tên Khách Hàng</th>
+                    <th>Số ID</th>
+                    <th>Loại ID</th>
+                    <th>Số Điện Thoại</th>
+                    <th>Email</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for khach_hang in khach_hangs %}
+                <tr>
+                    <td>{{ khach_hang.ma_khach_hang }}</td>
+                    <td>{{ khach_hang.ten_khach_hang }}</td>
+                    <td>{{ khach_hang.so_id }}</td>
+                    <td>{{ khach_hang.loai_id }}</td>
+                    <td>{{ khach_hang.so_dien_thoai }}</td>
+                    <td>{{ khach_hang.email }}</td>
+                    <td>
+                        <a href="/sua-khach-hang/{{ khach_hang.ma_khach_hang }}" class="btn">Sửa</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
