@@ -17,6 +17,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Mã tour</th>
                     <th>Tên Tour</th>
                     <th>Nơi Xuất Phát</th>
                     <th>Nơi Đến</th>
@@ -28,21 +29,26 @@
             <tbody>
                 {% for tour in tours %}
                 <tr>
-                    <td>{{ tour.ten_tour }}</td>
-                    <td>{{ tour.noi_xuat_phat }}</td>
-                    <td>{{ tour.noi_den }}</td>
-                    <td>{{ tour.ngay_xuat_phat }}</td>
-                    <td>{{ tour.gia_tour }} VNĐ</td>
+                    <td>{{ tour.TourID }}</td>
+                    <td>{{ tour.TourName }}</td>
+                    <td>{{ tour.Departure_Location }}</td>
+                    <td>{{ tour.Destination }}</td>
+                    <td>{{ tour.Departure_date }}</td>
+                    <td>{{ tour.Price }} VNĐ</td>
                     <td>
-                        <a href="/sua-tour/{{ tour.ma_tour }}">Sửa</a> | 
-                        <form action="{{ url_for('xoa_tour', ma_tour=tour.ma_tour) }}" method="POST" style="display:inline;">
+                        <a href="/sua-tour/{{ tour.TourID }}">Sửa</a> | 
+                        <form action="{{ url_for('xoa_tour', TourID=tour.TourID) }}" method="POST" style="display:inline;">
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa tour này?');">Xóa</button>
                         </form>
+                    </td>
+                    <td>
+                        <a href="/dat-ve" class="btn">Đặt Vé</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+
     </div>
 </body>
 </html>

@@ -28,14 +28,14 @@
             <tbody>
                 {% for khach_hang in khach_hangs %}
                 <tr>
-                    <td>{{ khach_hang.ma_khach_hang }}</td>
-                    <td>{{ khach_hang.ten_khach_hang }}</td>
-                    <td>{{ khach_hang.so_id }}</td>
-                    <td>{{ khach_hang.loai_id }}</td>
-                    <td>{{ khach_hang.so_dien_thoai }}</td>
-                    <td>{{ khach_hang.email }}</td>
+                    <td>{{ khach_hang.UserID }}</td>
+                    <td>{{ khach_hang.Full_Name }}</td>
+                    <td>{{ khach_hang.ID_number }}</td>
+                    <td>{{ khach_hang.IdType }}</td>
+                    <td>{{ khach_hang.Phone_number }}</td>
+                    <td>{{ khach_hang.Email }}</td>
                     <td>
-                        <a href="/sua-khach-hang/{{ khach_hang.ma_khach_hang }}" class="btn">Sửa</a>
+                        <a href="/sua-khach-hang/{{ khach_hang.UserID }}" class="btn">Sửa</a>
                     </td>
                 </tr>
                 {% endfor %}

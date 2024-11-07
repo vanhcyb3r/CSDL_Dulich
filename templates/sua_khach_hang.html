@@ -12,24 +12,24 @@
     </div>
 
     <div class="container">
-        <form action="{{ url_for('sua_khach_hang', ma_khach_hang=khach_hang['ma_khach_hang']) }}" method="POST">
-            <label for="ten_khach_hang">Tên Khách Hàng:</label>
-            <input type="text" id="ten_khach_hang" name="ten_khach_hang" value="{{ khach_hang['ten_khach_hang'] }}" required>
+        <form action="{{ url_for('sua_khach_hang', UserID=khach_hang['UserID']) }}" method="POST">
+            <label for="Full_Name">Tên Khách Hàng:</label>
+            <input type="text" id="Full_Name" name="Full_Name" value="{{ khach_hang['Full_Name'] }}" required>
             
-            <label for="so_id">Số ID:</label>
-            <input type="text" id="so_id" name="so_id" value="{{ khach_hang['so_id'] }}" required>
+            <label for="ID_number">Số ID:</label>
+            <input type="text" id="ID_number" name="ID_number" value="{{ khach_hang['ID_number'] }}" required>
 
-            <label for="loai_id">Loại ID:</label>
-            <input type="text" id="loai_id" name="loai_id" value="{{ khach_hang['loai_id'] }}" required>
+            <label for="IdType">Loại ID:</label>
+            <input type="text" id="IdType" name="IdType" value="{{ khach_hang['IdType'] }}" required>
 
-            <label for="so_dien_thoai">Số Điện Thoại:</label>
-            <input type="text" id="so_dien_thoai" name="so_dien_thoai" value="{{ khach_hang['so_dien_thoai'] }}" required>
+            <label for="Phone_number">Số Điện Thoại:</label>
+            <input type="text" id="Phone_number" name="Phone_number" value="{{ khach_hang['Phone_number'] }}" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="{{ khach_hang['email'] }}">
+            <label for="Email">Email:</label>
+            <input type="email" id="Email" name="Email" value="{{ khach_hang['Email'] }}">
 
-            <label for="dia_chi">Địa Chỉ:</label>
-            <input type="text" id="dia_chi" name="dia_chi" value="{{ khach_hang['dia_chi'] }}">
+            <label for="Address">Địa Chỉ:</label>
+            <input type="text" id="Address" name="Address" value="{{ khach_hang['Address'] }}">
 
             <input type="submit" value="Cập Nhật Khách Hàng">
         </form>

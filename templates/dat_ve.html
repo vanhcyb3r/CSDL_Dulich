@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Vé</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h1>Đặt Vé</h1>
+    </div>
+
+    <div class="container">
+        <form action="{{ url_for('dat_ve') }}" method="POST">
+            <label for="TourID">Chọn Tour:</label>
+            <input type="number" id="TourID" name="TourID" required>
+                {% for tour in tours %}
+                <option value="{{ tour.TourID }}">{{ tour.Tour_name }} - Giá: {{ tour.Price }} VND</option>
+                {% endfor %}
+            </select>
+            <label for="UserID">Chọn Khách Hàng:</label>
+            <input type="number" id="UserID" name="UserID" required>
+
+                {% for khach_hang in khach_hangs %}
+                <option value="{{ khach_hang.UserID }}">{{ khach_hang.Full_name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="InvoiceID">Mã vé:</label>
+            <input type="number" id="InvoiceID" name="InvoiceID" required>
+
+            <input type="submit" value="Đặt Vé">
+        </form>
+    </div>
+</body>
+</html>

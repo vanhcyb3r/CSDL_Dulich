@@ -13,24 +13,24 @@
     </div>
 
     <div class="container">
-        <form action="/sua-tour/{{ tour.ma_tour }}" method="POST">
-            <label for="ten_tour">Tên Tour:</label>
-            <input type="text" id="ten_tour" name="ten_tour" value="{{ tour.ten_tour }}" required>
+        <form action="/sua-tour/{{ tour.TourID }}" method="POST">
+            <label for="TourName">Tên Tour:</label>
+            <input type="text" id="TourName" name="TourName" value="{{ tour.TourName }}" required>
 
-            <label for="noi_xuat_phat">Nơi Xuất Phát:</label>
-            <input type="text" id="noi_xuat_phat" name="noi_xuat_phat" value="{{ tour.noi_xuat_phat }}" required>
+            <label for="Departure_Location">Nơi Xuất Phát:</label>
+            <input type="text" id="Departure_Location" name="Departure_Location" value="{{ tour.Departure_Location }}" required>
 
-            <label for="noi_den">Nơi Đến:</label>
-            <input type="text" id="noi_den" name="noi_den" value="{{ tour.noi_den }}" required>
+            <label for="Destination">Nơi Đến:</label>
+            <input type="text" id="Destination" name="Destination" value="{{ tour.Destination }}" required>
 
-            <label for="ngay_xuat_phat">Ngày Xuất Phát:</label>
-            <input type="date" id="ngay_xuat_phat" name="ngay_xuat_phat" value="{{ tour.ngay_xuat_phat }}" required>
+            <label for="Departure_date">Ngày Xuất Phát:</label>
+            <input type="date" id="Departure_date" name="Departure_date" value="{{ tour.Departure_date }}" required>
 
-            <label for="gia_tour">Giá Tour:</label>
-            <input type="text" id="gia_tour" name="gia_tour" value="{{ tour.gia_tour }}" required>
+            <label for="Price">Giá Tour:</label>
+            <input type="text" id="Price" name="Price" value="{{ tour.Price }}" required>
 
-            <label for="so_luong_ve">Số Lượng Vé:</label>
-            <input type="number" id="so_luong_ve" name="so_luong_ve" value="{{ tour.so_luong_ve }}" required>
+            <label for="Num_tickets">Số Lượng Vé:</label>
+            <input type="number" id="Num_tickets" name="Num_tickets" value="{{ tour.Num_tickets }}" required>
 
             <button type="submit">Cập nhật</button>
         </form>

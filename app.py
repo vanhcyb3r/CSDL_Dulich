@@ -1,12 +1,13 @@
 import mysql.connector
 from flask import Flask, render_template, request, redirect, url_for
+from datetime import date
 app = Flask(__name__)
 def get_db_connection():
     connection = mysql.connector.connect(
         host="localhost",
         user="root",
         password="123456789",  # Thay bằng mật khẩu của bạn
-        database="quanlytourdulich"  # Thay bằng tên database của bạn
+        database="qltourdulich"  # Thay bằng tên database của bạn
     )
     return connection
 @app.route('/')
@@ -15,15 +16,15 @@ def trang_chu():
 
 @app.route('/tim-kiem-tour', methods=['GET'])
 def danh_sach_tour():
-    ten_tour = request.args.get('ten_tour', '')
+    TourName = request.args.get('TourName', '')
 
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
 
     # Nếu có yêu cầu tìm kiếm, sử dụng LIKE để tìm theo tên
-    if ten_tour:
-        query = "SELECT * FROM Tour WHERE ten_tour LIKE %s"
-        cursor.execute(query, ('%' + ten_tour + '%',))
+    if TourName:
+        query = "SELECT * FROM Tour WHERE TourName LIKE %s"
+        cursor.execute(query, ('%' + TourName + '%',))
     else:
         query = "SELECT * FROM Tour"
         cursor.execute(query)
@@ -49,13 +50,15 @@ def quan_ly_tour():
 @app.route('/them-tour', methods=['GET', 'POST'])
 def them_tour():
     if request.method == 'POST':
-        ten_tour = request.form['ten_tour']
-        noi_xuat_phat = request.form['noi_xuat_phat']
-        noi_den = request.form['noi_den']
-        mo_ta = request.form['mo_ta']
-        ngay_xuat_phat = request.form['ngay_xuat_phat']
-        gia_tour = request.form['gia_tour']
-        so_luong_ve = request.form['so_luong_ve']
+        TourID = request.form['TourID']
+        TourName = request.form['TourName']
+        AdminID = request.form['AdminID']
+        Departure_Location = request.form['Departure_Location']
+        Destination = request.form['Destination']
+        Description = request.form['Description']
+        Departure_date = request.form['Departure_date']
+        Price = request.form['Price']
+        Num_tickets = request.form['Num_tickets']
 
         # Kết nối tới cơ sở dữ liệu
         conn = get_db_connection()
@@ -63,10 +66,9 @@ def them_tour():
 
         # Chèn dữ liệu mới vào bảng Tour
         cursor.execute("""
-            INSERT INTO Tour (ten_tour, noi_xuat_phat, noi_den, mo_ta, ngay_xuat_phat, gia_tour, so_luong_ve)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
-        """, (ten_tour, noi_xuat_phat, noi_den, mo_ta, ngay_xuat_phat, gia_tour, so_luong_ve))
-
+            INSERT INTO Tour (TourID, TourName, AdminID, Departure_Location, Destination, Description, Departure_date, Price, Num_tickets)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (TourID, TourName, AdminID, Departure_Location, Destination, Description, Departure_date, Price, Num_tickets))
         conn.commit()
         conn.close()
 
@@ -74,44 +76,44 @@ def them_tour():
         return redirect(url_for('quan_ly_tour'))
 
     return render_template('add_tour.html')
-@app.route('/sua-tour/<int:ma_tour>', methods=['GET', 'POST'])
-def sua_tour(ma_tour):
+@app.route('/sua-tour/<int:TourID>', methods=['GET', 'POST'])
+def sua_tour(TourID):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     
     if request.method == 'POST':
-        ten_tour = request.form['ten_tour']
-        noi_xuat_phat = request.form['noi_xuat_phat']
-        noi_den = request.form['noi_den']
-        ngay_xuat_phat = request.form['ngay_xuat_phat']
-        gia_tour = request.form['gia_tour']
-        so_luong_ve = request.form['so_luong_ve']
+        TourName = request.form['TourName']
+        Departure_Location = request.form['Departure_Location']
+        Destination = request.form['Destination']
+        Departure_date = request.form['Departure_date']
+        Price = request.form['Price']
+        Num_tickets = request.form['Num_tickets']
 
         # Cập nhật dữ liệu tour trong database
         cursor.execute("""
             UPDATE Tour
-            SET ten_tour = %s, noi_xuat_phat = %s, noi_den = %s, ngay_xuat_phat = %s, gia_tour = %s, so_luong_ve = %s
-            WHERE ma_tour = %s
-        """, (ten_tour, noi_xuat_phat, noi_den, ngay_xuat_phat, gia_tour, so_luong_ve, ma_tour))
+            SET TourName = %s, Departure_Location = %s, Destination = %s, Departure_date = %s, Price = %s, Num_tickets = %s
+            WHERE TourID = %s
+        """, (TourName, Departure_Location, Destination, Departure_date, Price, Num_tickets, TourID))
 
         conn.commit()
         conn.close()
         return redirect(url_for('quan_ly_tour'))
 
     # Lấy thông tin tour hiện tại từ database
-    cursor.execute("SELECT * FROM Tour WHERE ma_tour = %s", (ma_tour,))
+    cursor.execute("SELECT * FROM Tour WHERE TourID = %s", (TourID,))
     tour = cursor.fetchone()
     conn.close()
     
     return render_template('edit_tour.html', tour=tour)
-@app.route('/xoa-tour/<int:ma_tour>', methods=['POST'])
-def xoa_tour(ma_tour):
+@app.route('/xoa-tour/<int:TourID>', methods=['POST'])
+def xoa_tour(TourID):
     conn = get_db_connection()
     cursor = conn.cursor()
 
     try:
         # Xóa tour dựa trên mã tour
-        cursor.execute("DELETE FROM Tour WHERE ma_tour = %s", (ma_tour,))
+        cursor.execute("DELETE FROM Tour WHERE TourID = %s", (TourID,))
         conn.commit()
     except Exception as e:
         conn.rollback()  # Rollback nếu có lỗi
@@ -127,7 +129,7 @@ def quan_ly_khach_hang():
     conn = get_db_connection()  # Kết nối tới cơ sở dữ liệu
     cursor = conn.cursor(dictionary=True)  # Sử dụng dictionary cursor
     
-    cursor.execute("SELECT * FROM KhachHang")  # Truy vấn tất cả khách hàng
+    cursor.execute("SELECT * FROM User")  # Truy vấn tất cả khách hàng
     khach_hangs = cursor.fetchall()  # Lấy danh sách khách hàng
 
     conn.close()  # Đóng kết nối
@@ -138,22 +140,23 @@ def quan_ly_khach_hang():
 @app.route('/them-khach-hang', methods=['GET', 'POST'])
 def them_khach_hang():
     if request.method == 'POST':
-        ten_khach_hang = request.form['ten_khach_hang']
-        so_id = request.form['so_id']
-        loai_id = request.form['loai_id']
-        so_dien_thoai = request.form['so_dien_thoai']
-        email = request.form['email']
-        dia_chi = request.form['dia_chi']
-
+        UserID = request.form['UserID']
+        Full_Name = request.form['Full_Name']
+        ID_number = request.form['ID_number']
+        IdType = request.form['IdType']
+        Phone_number = request.form['Phone_number']
+        Email = request.form['Email']
+        Address = request.form['Address']
+        AdminID = request.form['AdminID']
         # Kết nối đến cơ sở dữ liệu
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # Thêm khách hàng mới vào bảng KhachHang
+        # Thêm khách hàng mới vào bảng User
         cursor.execute("""
-            INSERT INTO KhachHang (ten_khach_hang, so_id, loai_id, so_dien_thoai, email, dia_chi)
-            VALUES (%s, %s, %s, %s, %s, %s)
-        """, (ten_khach_hang, so_id, loai_id, so_dien_thoai, email, dia_chi))
+            INSERT INTO User (UserID, Full_Name, ID_number, IdType, Phone_number, Email, Address, AdminID)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """, (UserID, Full_Name, ID_number, IdType, Phone_number, Email, Address, AdminID))
         
         conn.commit()  # Lưu thay đổi vào cơ sở dữ liệu
         conn.close()   # Đóng kết nối
@@ -168,15 +171,15 @@ def thong_ke():
     cursor = conn.cursor(dictionary=True)  # Sử dụng dictionary cursor
     
     # Thống kê tổng doanh thu
-    cursor.execute("SELECT SUM(tong_tien) AS tong_doanh_thu FROM DatVe")
+    cursor.execute("SELECT SUM(Total) AS tong_doanh_thu FROM Invoice")
     tong_doanh_thu = cursor.fetchone()["tong_doanh_thu"]
     
     # Thống kê số lượng khách hàng
-    cursor.execute("SELECT COUNT(ma_khach_hang) AS so_luong_khach_hang FROM KhachHang")
+    cursor.execute("SELECT COUNT(UserID) AS so_luong_khach_hang FROM User")
     so_luong_khach_hang = cursor.fetchone()["so_luong_khach_hang"]
     
     # Thống kê số lượng tour đã được đặt
-    cursor.execute("SELECT COUNT(DISTINCT ma_tour) AS so_luong_tour_da_dat FROM DatVe")
+    cursor.execute("SELECT COUNT(DISTINCT TourID) AS so_luong_tour_da_dat FROM Invoice")
     so_luong_tour_da_dat = cursor.fetchone()["so_luong_tour_da_dat"]
 
     conn.close()  # Đóng kết nối
@@ -186,26 +189,26 @@ def thong_ke():
                            so_luong_khach_hang=so_luong_khach_hang, 
                            so_luong_tour_da_dat=so_luong_tour_da_dat)
 
-@app.route('/sua-khach-hang/<int:ma_khach_hang>', methods=['GET', 'POST'])
-def sua_khach_hang(ma_khach_hang):
+@app.route('/sua-khach-hang/<int:UserID>', methods=['GET', 'POST'])
+def sua_khach_hang(UserID):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
     if request.method == 'POST':
         # Lấy dữ liệu từ form
-        ten_khach_hang = request.form['ten_khach_hang']
-        so_id = request.form['so_id']
-        loai_id = request.form['loai_id']
-        so_dien_thoai = request.form['so_dien_thoai']
-        email = request.form['email']
-        dia_chi = request.form['dia_chi']
+        Full_Name = request.form['Full_Name']
+        ID_number = request.form['ID_number']
+        IdType = request.form['IdType']
+        Phone_number = request.form['Phone_number']
+        Email = request.form['Email']
+        Address = request.form['Address']
 
         # Cập nhật thông tin khách hàng trong cơ sở dữ liệu
         cursor.execute("""
-            UPDATE KhachHang 
-            SET ten_khach_hang = %s, so_id = %s, loai_id = %s, so_dien_thoai = %s, email = %s, dia_chi = %s
-            WHERE ma_khach_hang = %s
-        """, (ten_khach_hang, so_id, loai_id, so_dien_thoai, email, dia_chi, ma_khach_hang))
+            UPDATE User 
+            SET Full_Name = %s, ID_number = %s, IdType = %s, Phone_number = %s, Email = %s, Address = %s
+            WHERE UserID = %s
+        """, (Full_Name, ID_number, IdType, Phone_number, Email, Address, UserID))
 
         conn.commit()
         conn.close()
@@ -213,12 +216,54 @@ def sua_khach_hang(ma_khach_hang):
         return redirect(url_for('quan_ly_khach_hang'))  # Quay lại trang quản lý khách hàng sau khi sửa
 
     # Lấy thông tin khách hàng hiện tại để hiển thị trong form
-    cursor.execute("SELECT * FROM KhachHang WHERE ma_khach_hang = %s", (ma_khach_hang,))
+    cursor.execute("SELECT * FROM User WHERE UserID = %s", (UserID,))
     khach_hang = cursor.fetchone()
 
     conn.close()
 
     return render_template('sua_khach_hang.html', khach_hang=khach_hang)
 
+@app.route('/dat-ve', methods=['GET', 'POST'])
+def dat_ve():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    if request.method == 'POST':
+        # Lấy dữ liệu từ form
+        TourID = int(request.form['TourID'])
+        UserID = request.form['UserID']
+        InvoiceID = request.form['InvoiceID']
+        Booking_day = date.today()
+        # Lấy giá tour để tính tổng tiền
+        cursor.execute("SELECT Price, Num_tickets FROM tour WHERE TourID = %s", (TourID,))
+        tours = cursor.fetchone()
+        Quantity = tours['Num_tickets']
+        Total = tours['Price'] * Quantity
+        # Lấy danh sách khách hàng
+        cursor.execute("SELECT UserID, Full_Name FROM User")
+        khach_hangs = cursor.fetchall()  
+
+        # Thêm dữ liệu vào bảng DatVe
+        cursor.execute("""
+            INSERT INTO Invoice (InvoiceID, UserID, TourID, Booking_day, Quantity, Total)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (InvoiceID, UserID, TourID, Booking_day, Quantity, Total))
+        
+        conn.commit()
+        conn.close()
+        
+        # Quay lại trang danh sách hoặc trang quản lý đặt vé
+        return redirect(url_for('quan_ly_tour'))
+
+    # Lấy thông tin tour để hiển thị trong form
+    cursor.execute("SELECT * FROM Tour ")
+    tours = cursor.fetchall()
+    cursor.execute("SELECT * FROM User ")
+    khach_hangs = cursor.fetchall()
+    conn.close()
+    
+    return render_template('dat_ve.html', tours= tours,khach_hangs=khach_hangs)
 if __name__ == '__main__':
     app.run(debug=True)
+
+

@@ -12,8 +12,8 @@
 
         <!-- Form tìm kiếm tour -->
         <form action="/tim-kiem-tour" method="GET">
-            <label for="ten_tour">Tìm kiếm theo tên tour:</label>
-            <input type="text" id="ten_tour" name="ten_tour" placeholder="Nhập tên tour" value="{{ request.args.get('ten_tour', '') }}">
+            <label for="TourName">Tìm kiếm theo tên tour:</label>
+            <input type="text" id="TourName" name="TourName" placeholder="Nhập tên tour" value="{{ request.args.get('TourName', '') }}">
             <button type="submit">Tìm kiếm</button>
         </form>
 
@@ -23,7 +23,7 @@
             {% if tours %}
                 {% for tour in tours %}
                     <li>
-                        <strong>{{ tour.ten_tour }}</strong> - Nơi xuất phát: {{ tour.noi_xuat_phat }} - Nơi đến: {{ tour.noi_den }} - Giá vé: {{ tour.gia_tour }} VNĐ
+                        <strong>{{ tour.TourName }}</strong> - Nơi xuất phát: {{ tour.Departure_Location }} - Nơi đến: {{ tour.Destination }} - Giá vé: {{ tour.Price }} VNĐ
                         <!-- Link chỉnh sửa -->
                         
                         <br>

@@ -14,26 +14,32 @@
 
     <div class="container">
         <form action="/them-tour" method="POST">
-            <label for="ten_tour">Tên Tour:</label>
-            <input type="text" id="ten_tour" name="ten_tour" required>
+            <label for="TourID">Mã Tour</label>
+            <input type="number" id="TourID" name="TourID" required>
 
-            <label for="noi_xuat_phat">Nơi Xuất Phát:</label>
-            <input type="text" id="noi_xuat_phat" name="noi_xuat_phat" required>
+            <label for="TourName">Tên Tour:</label>
+            <input type="text" id="TourName" name="TourName" required>
 
-            <label for="noi_den">Nơi Đến:</label>
-            <input type="text" id="noi_den" name="noi_den" required>
+            <label for="AdminID">Admin</label>
+            <input type="number" id="AdminID" name="AdminID" required>
 
-            <label for="mo_ta">Mô Tả:</label>
-            <textarea id="mo_ta" name="mo_ta"></textarea>
+            <label for="Departure_Location">Nơi Xuất Phát:</label>
+            <input type="text" id="Departure_Location" name="Departure_Location" required>
 
-            <label for="ngay_xuat_phat">Ngày Xuất Phát:</label>
-            <input type="date" id="ngay_xuat_phat" name="ngay_xuat_phat" required>
+            <label for="Destination">Nơi Đến:</label>
+            <input type="text" id="Destination" name="Destination" required>
 
-            <label for="gia_tour">Giá Tour:</label>
-            <input type="number" id="gia_tour" name="gia_tour" step="0.01" required>
+            <label for="Description">Mô Tả:</label>
+            <textarea id="Description" name="Description"></textarea>
 
-            <label for="so_luong_ve">Số Lượng Vé:</label>
-            <input type="number" id="so_luong_ve" name="so_luong_ve" required>
+            <label for="Departure_date">Ngày Xuất Phát:</label>
+            <input type="date" id="Departure_date" name="Departure_date" required>
+
+            <label for="Price">Giá Tour:</label>
+            <input type="number" id="Price" name="Price" step="0.01" required>
+
+            <label for="Num_tickets">Số Lượng Vé:</label>
+            <input type="number" id="Num_tickets" name="Num_tickets" required>
 
             <button type="submit">Thêm Tour</button>
         </form>

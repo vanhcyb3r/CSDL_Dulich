@@ -13,23 +13,29 @@
 
     <div class="container">
         <form action="{{ url_for('them_khach_hang') }}" method="POST">
-            <label for="ten_khach_hang">Tên Khách Hàng:</label>
-            <input type="text" id="ten_khach_hang" name="ten_khach_hang" required>
+            <label for="UserID">Mã khách hàng</label>
+            <input type="number" id="UserID" name="UserID" required>
+
+            <label for="Full_Name">Tên Khách Hàng:</label>
+            <input type="text" id="Full_Name" name="Full_Name" required>
             
-            <label for="so_id">Số ID:</label>
-            <input type="text" id="so_id" name="so_id" required>
+            <label for="ID_number">Số ID:</label>
+            <input type="text" id="ID_number" name="ID_number" required>
 
-            <label for="loai_id">Loại ID:</label>
-            <input type="text" id="loai_id" name="loai_id" required>
+            <label for="IdType">Loại ID:</label>
+            <input type="text" id="IdType" name="IdType" required>
 
-            <label for="so_dien_thoai">Số Điện Thoại:</label>
-            <input type="text" id="so_dien_thoai" name="so_dien_thoai" required>
+            <label for="Phone_number">Số Điện Thoại:</label>
+            <input type="text" id="Phone_number" name="Phone_number" required>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
+            <label for="Email">Email:</label>
+            <input type="Email" id="Email" name="Email">
 
-            <label for="dia_chi">Địa Chỉ:</label>
-            <input type="text" id="dia_chi" name="dia_chi">
+            <label for="Address">Địa Chỉ:</label>
+            <input type="text" id="Address" name="Address">
+
+            <label for="AdminID">Admin</label>
+            <input type="number" id="AdminID" name="AdminID" required>
 
             <input type="submit" value="Thêm Khách Hàng">
         </form>
